@@ -45,7 +45,7 @@ def populate_db():
 
     print("-- adding jobs")
     for job in data.jobs:
-        cat = Specialty.objects.get_or_create(title=job['cat'])[0]
+        cat = Specialty.objects.get_or_create(code=job['cat'])[0]
         company = Company.objects.get_or_create(name=job['company'])[0]
         add_vacancy(job['title'], cat, company, job['salary_from'],
                     job['salary_to'], job['posted'], job['desc'])
