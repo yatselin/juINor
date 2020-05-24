@@ -4,7 +4,7 @@ from .models import Company, Application
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ('name', 'location', 'description', 'employee_count', 'logo',)
+        fields = ('name', 'location', 'description', 'employee_count',)
         required = ("name",)
 
 class ApplicationForm(forms.ModelForm):

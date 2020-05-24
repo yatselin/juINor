@@ -15,7 +15,7 @@ class Specialty(models.Model):
 class Company(models.Model):
     name = models.CharField(max_length=255)
     location = models.CharField(max_length=255, default='')
-    logo = models.ImageField(upload_to='', default='')
+    logo = models.ImageField(upload_to='', default='', null=True)
     description = models.CharField(max_length=255, default='')
     employee_count = models.IntegerField(default=0)
     #owner = models.OneToOneField(User, on_delete=models.CASCADE, default=None, null=True)
@@ -52,4 +52,6 @@ class Application(models.Model):
     vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE, related_name='applications', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications', default=None, null=True)
 
-
+    def __str__(self):
+        return f'User: {self.name} // Vacancy: {self.vacancy}'
+        

@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.db.models import Count
 
+
 from .models import Vacancy, Company, Specialty
-from .forms import ApplicationForm
+from .forms import ApplicationForm, CompanyForm
 
 def index(request):
 
@@ -112,8 +113,29 @@ def my_CV(request):
         return render(request, 'resume-edit.html', context)
 
 def my_company(request):
-        context = {}
-        return render(request, 'company-edit.html', context)
+
+        if request.method == "GET":
+                try:
+                        company = Company.objects.get(owner=request.user)
+                except:
+                        company = None
+                if company:
+                        form = CompanyForm(instance=company)
+                else:
+                        form = CompanyForm()
+
+                context = {"form": form}
+                return render(request, 'company-edit.html', context)
+        if request.method == "POST":
+                form = CompanyForm(request.POST)
+                if form.is_valid():
+                        company = form.save(commit=False)
+                        company.owner = request.user
+                        company.save()
+                       # context = {"form": form}
+                        return redirect('index')           
+
+
 
 def my_company_vacancies(request):
         context = {}
