@@ -11,10 +11,14 @@
 
     <section>
       <div class="text-center">
-        <img src="https://place-hold.it/130x80" width="130" height="80" alt="">
+        {% load thumbnail %}
+        {% thumbnail company.logo "130x80" crop="center" format="PNG" upscale=True as im %}
+        <img src="{{ im.url }}" alt="">
+        {% endthumbnail %}
       </div>
       <h1 class="h1 text-center mx-auto mt-0 pt-1" style="font-size: 70px;"><strong>{{ company.name }}</strong></h1>
-      <p class="text-center pt-1">Компания, {{vacancies.count}} вакансий</p>
+      <p class="text-center pt-1">{{ company.description }}</p>
+      <p class="text-center pt-1">{{vacancies.count}} вакансий</p>
       <div class="row mt-5">
         <div class="col-12 col-lg-8 offset-lg-2 m-auto">
           {% for vacancy in vacancies %}
