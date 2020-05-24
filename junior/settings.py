@@ -13,14 +13,21 @@ SECRET_KEY = '=xdxytej8$j2uj+ad&xs3il5yozy1g2gd@xf5+tl%va_2ym((g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        "localhost",
+        "127.0.0.1",
+        "[::1]",
+        "testserver",
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
     'jobs',
+    'users',    
     'django.contrib.sites',    
     'django.contrib.flatpages',      
     'django.contrib.admin',
@@ -30,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+
 
   
 ]
@@ -124,3 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+# Login
+
+LOGIN_URL = "/auth/login/"
+LOGIN_REDIRECT_URL = "index" 
+LOGOUT_REDIRECT_URL = "index"

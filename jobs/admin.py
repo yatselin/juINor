@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Company, Specialty, Vacancy
+from .models import Company, Specialty, Vacancy, User
 
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ("pk", "name", "location", "description", "employee_count") 

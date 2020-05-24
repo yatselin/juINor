@@ -14,5 +14,7 @@ urlpatterns = [
         "companies/<int:company_id>",
         views.company_profile, name="company_profile"),
     path("companies/", views.companies, name="companies"),
+    path("my_company/", views.my_company, name="my_company"),
+    path("my_CV/", views.my_CV, name="my_CV"),
     path("", views.index, name="index"),
 ]
