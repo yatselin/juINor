@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Company, Specialty, Vacancy, User
+from .models import Company, Specialty, Vacancy, User, Application
 
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ("pk", "name", "location", "description", "employee_count") 
@@ -19,4 +19,4 @@ class VacancyAdmin(admin.ModelAdmin):
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Specialty)
 admin.site.register(Vacancy, VacancyAdmin)
-
+admin.site.register(Application)

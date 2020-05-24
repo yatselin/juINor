@@ -49,7 +49,7 @@ class Application(models.Model):
     name = models.CharField(max_length=155)
     phone = models.CharField(max_length=55)
     cover_letter = models.TextField()
-    vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE, related_name='applications')
+    vacancy = models.ForeignKey(Vacancy, on_delete=models.CASCADE, related_name='applications', null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications', default=None, null=True)
 
 

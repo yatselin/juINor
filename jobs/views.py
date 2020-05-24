@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.db.models import Count
 
 from .models import Vacancy, Company, Specialty
-
+from .forms import ApplicationForm
 
 def index(request):
 
@@ -25,7 +25,9 @@ def index(request):
 
 def vacancy(request, vacancy_id):
     vacancy = get_object_or_404(Vacancy, pk=vacancy_id)
-    context = {"vacancy": vacancy}
+    form = ApplicationForm()
+    context = {"vacancy": vacancy,
+                "form": form}
     return render(request, 'vacancy.html', context)
 
 
@@ -53,7 +55,7 @@ def vacancies(request):
 
 def spec_vacancies(request, specialty):
     specialty_obj = get_object_or_404(Specialty, code=specialty) 
-    vacancies_all = get_list_or_404(Vacancy)
+    vacancies_all = get_list_or_404(Vacancy, specialty=specialty_obj)
     vacancies = Vacancy.objects.values(
             'title',
             'specialty',
@@ -122,8 +124,14 @@ def my_company_vacancy(request, id):
         return render(request, 'vacancy-edit.html', context)
 
 def vacancies_send(request, id):
-        context = {}
-        return render(request, 'sent.html', context)
+        form = ApplicationForm(request.POST)
+        vacancy = Vacancy.objects.get(pk=id)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.vacancy = vacancy
+            application.save()
+            context = {"vacancy": vacancy}
+            return render(request, 'sent.html', context)
 
 
 
