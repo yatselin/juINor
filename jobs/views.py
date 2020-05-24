@@ -113,10 +113,17 @@ def my_company(request):
         context = {}
         return render(request, 'company-edit.html', context)
 
+def my_company_vacancies(request):
+        context = {}
+        return render(request, 'vacancy-list.html', context)
 
+def my_company_vacancy(request, id):
+        context = {}
+        return render(request, 'vacancy-edit.html', context)
 
-
-
+def vacancies_send(request, id):
+        context = {}
+        return render(request, 'sent.html', context)
 
 
 
